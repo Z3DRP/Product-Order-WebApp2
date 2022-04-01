@@ -1,0 +1,49 @@
+﻿@model IEnumerable<OdersWebApp.Models.Order>
+@{ ViewBag.Title = "Orders";}
+
+<a asp-area="Admins" asp-action="Add" asp-controller="Order" class="ml-2">Add Order</a>
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Order Number</th>
+            <th>Order Date</th>
+            <th>Delivery Date</th>
+            <th>Order Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (OdersWebApp.Models.Order order in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-area="Admins" asp-action="Details" asp-controller="Order"
+                       asp-route-model="@ViewBag.Action" asp-route-val="@order.Slug">
+                        @*@order.Customer.FirstName  @order.Customer.LastName*@
+                        @order.Customer.CustomerFullName
+                    </a>
+                </td>
+                <td>
+                    <a asp-area="Admins" asp-action="Details" asp-controller="Order"
+                       asp-route-model="@ViewBag.Action" asp-route-val="@order.Slug">
+                        @order.OrderID
+                    </a>
+                </td>
+                <td>
+
+                    @*@order.Product.OrderBy(p => p.Name)*@
+                    @foreach (OdersWebApp.Models.OrderedProduct op in order.Product)
+                    {
+                        <a asp-area="Admin" asp-action="Details" asp-controller="Order"
+                           asp-route-model="@ViewBag.Action" asp-route-val="@order.ProductID">
+                            @op.Name
+                        </a>
+                    }
+                </td>
+                <td>@order.OrderDate.ToShortDateString()</td>
+                <td>@order.DeliveryDate.ToShortDateString()</td>
+                <td>@order.OrderPrice.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>

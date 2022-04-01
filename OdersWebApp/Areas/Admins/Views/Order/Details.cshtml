@@ -1,1 +1,53 @@
-﻿<h2>Order Details</h2>
+﻿@model OdersWebApp.Models.Order
+@{ ViewBag.Title = "Order Details";}
+
+<h2>Order Details</h2>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <label>Order Number:</label>
+        @Model.OrderID
+    </li>
+    <li class="list-group-item">
+        <label>Customer Name:</label>
+        @Model.Customer.CustomerFullName
+    </li>
+    <!--need foreach-->
+    @*<li class="list-group-item">
+            <label>Product(s):</label>
+            @Model.Product
+        </li>*@
+<li class="list-group-item">
+    <label>Product(s):</label>
+    @foreach (OdersWebApp.Models.OrderedProduct op in Model.Product)
+    {
+        @op.Name
+    }
+</li>
+    <li class="list-group-item">
+        <label>Price:</label>
+        @Model.OrderPrice.ToString("C")
+    </li>
+    <li class="list-group-item">
+        <label>Order Date:</label>
+        @Model.OrderDate.ToShortDateString()
+    </li>
+    <li class="list-group-item">
+        <label>Delivery Date:</label>
+        @Model.DeliveryDate.ToShortDateString()
+    </li>
+    <li class="list-group-item">
+        <a asp-area="Admins" asp-action="Edit" asp-controller="Order"
+           asp-route-model="@ViewBag.Action" asp-route-val="@Model.Slug">
+            class="btn btn-dark">Edit
+        </a>
+
+        <a asp-area="Admins" asp-action="Delete" asp-cpontroller="Order"
+           asp-route-model="@ViewBag.Action" asp-routeval="@Model.Slug"
+            class="btn btn-dark">Delete
+        </a>
+
+        <a asp-area="Admins" asp-action="Index" asp-controller="Home"
+           class="btn btn-dark">Home</a>
+    </li>
+</ul>

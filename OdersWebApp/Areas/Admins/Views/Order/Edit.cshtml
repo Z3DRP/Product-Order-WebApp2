@@ -1,0 +1,53 @@
+﻿@model OdersWebApp.Models.Order
+@{ ViewBag.Title = $"{ViewBag.Action} Order";}
+
+<h2>@ViewBag.Action Order</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="OrderID" />
+
+    <div class="form-group">
+        <label asp-for="@Model.Customer.FirstName">First Name:</label>
+        <input asp-for="@Model.Customer.FirstName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Customer.LastName">Last Name:</label>
+        <input asp-for="@Model.Customer.LastName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <!--I need a nested for each loop to go threw each product but how I couldnt get it to work-->
+        <label asp-for="ProductID">Product ID:</label>
+        <input asp-for="ProductID" class="form-control" />"
+    </div>
+    <div class="form-group">
+        <label asp-for="OrderPrice">Order Price:</label>
+        <input asp-for="OrderPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OrderDate">Order Date:</label>
+        <input asp-for="OrderDate" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DeliveryDate">Delivery Date:</label>
+        <input asp-for="DeliveryDate" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-dark">@ViewBag.Action</button>
+
+    @if (ViewBag.Action == "Edit")
+    {
+        <a asp-area="Admins" asp-action="Details" asp-controller="Order"
+           asp-route-model="@ViewBag.Action" asp-route-val="@Model.Slug"
+            class="btn btn-dark">Cancel
+        </a>
+    }
+    else
+    {
+        <a asp-area="Admins" asp-action="Index" asp-controller="Home"
+           class="btn btn-dark">Cancel</a>
+    }
+
+</form>

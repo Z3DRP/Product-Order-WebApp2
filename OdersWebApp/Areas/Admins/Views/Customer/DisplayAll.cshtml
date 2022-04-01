@@ -1,0 +1,43 @@
+﻿@model IEnumerable<OdersWebApp.Models.Customer>
+@{ ViewBag.Title = "Customers";}
+
+<a asp-action="AddCustomer" asp-controller="Contact" class="ml-2">Add Customer</a>
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Email Address</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zipcode</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (OdersWebApp.Models.Customer customer in Model)
+        {
+            <tr>
+                <td>
+                    <a aso-area="Admins" asp-action="Details" asp-controller="Customer"
+                       asp-route-model="@ViewBag.Action" asp-route-val="@customer.Slug">
+                        @customer.FirstName
+                    </a>
+                </td>
+                <td>
+                    <a asp-area="Admins" asp-action="Details" asp-controller="Customer"
+                       asp-route-model="@ViewBag.Action" asp-route-val="@customer.Slug">
+                        @customer.LastName
+                    </a>
+                </td>
+                <td>@customer.PhoneNumber</td>
+                <td>@customer.EmailAddress</td>
+                <td>@customer.Street</td>
+                <td>@customer.City</td>
+                <td>@customer.State</td>
+                <td>@customer.Zipcode</td>
+            </tr>
+        }
+    </tbody>
+</table>

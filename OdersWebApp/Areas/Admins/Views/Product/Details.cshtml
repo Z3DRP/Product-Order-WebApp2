@@ -1,1 +1,36 @@
-﻿<h2>Product Details</h2>
+﻿@model OdersWebApp.Models.Product
+@{ ViewBag.Title = "Product Details";}
+
+<h2>Product Details</h2>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <label>Name:</label>
+        @Model.Name
+    </li>
+    <li class="list-group-item">
+        <label>Description:</label>
+        @Model.Description
+    </li>
+    <li class="list-group-item">
+        <label>Unit Price:</label>
+        @Model.UnitPrice.ToString("C")
+    </li>
+    <li class="list-group-item">
+        <label>Image:</label>
+        <img scr="~/images/@Model.Image" alt="@Model.Name Image"
+             title="@Model.ProductID | @Model.Name" />
+    </li>
+    <li class="list-group-item">
+        <a asp-area="Admins" asp-action="Edit" asp-controller="Product"
+           asp-route-model="@ViewBag.Action" asp-route-val="@Model.Slug"
+           class="btn btn-dark">Edit</a>
+
+        <a asp-area="Admins" asp-action="Delete" asp-controller="Product"
+           asp-route-model="@ViewBag.Action" asp-route-val="@Model.Slug"
+           class="btn btn-dark">Delete</a>
+
+        <a asp-area="Admins" asp-action="Index" asp-controller="Home"
+           class="btn btn-dark">Home</a>
+    </li>
+</ul>

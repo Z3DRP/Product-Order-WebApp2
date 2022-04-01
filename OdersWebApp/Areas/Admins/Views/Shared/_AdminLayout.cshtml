@@ -21,24 +21,37 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Customer" asp-action="AddUpdate">Add Customer</a>
+                        <!--Test for having a layout for each model type-->
+                        @*@RenderSection("ManageCustomers", false);
+                          @RenderSection("ManageProducts", false);
+                         @RenderSection("ManageOrders", false);*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Customer" asp-action="Manage">Manage Customers</a>
                         </li>
                         <li>
-                            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Customer" asp-action="Details">Customer Details</a>
+                            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Product" asp-action="Manage">Manage Products</a>
                         </li>
                         <li>
-                            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Product" asp-action="AddUpdate">Add Product</a>
+                            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Order" asp-action="Manage">Manage Orders</a>
                         </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Product" asp-action="Details">Product Details</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Order" asp-action="AddUpdate">Add Order</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Order" asp-action="Details">Order Details</a>
-                        </li>
+                        @*<li>
+            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Customer" asp-action="Add">AddCustomers</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Customer" asp-action="Details">Customer Details</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Product" asp-action="AddUpdate">Add Product</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Product" asp-action="Details">Product Details</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Order" asp-action="AddUpdate">Add Order</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Order" asp-action="Details">Order Details</a>
+        </li>*@
                     </ul>
                 </div>
             </div>

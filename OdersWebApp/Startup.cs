@@ -53,10 +53,14 @@ namespace OdersWebApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapAreaControllerRoute(
-                    name: "admins",
+                    name: "adminsDefault",
                     areaName: "Admins",
                     pattern: "Admins/{controller=Home}/{action=Index}/{id?}"
                     );
+                endpoints.MapAreaControllerRoute(
+                    name: "admins2",
+                    areaName: "Admins",
+                    pattern: "Admins/{controller=Home}/{action=Index}/manage/{model?}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

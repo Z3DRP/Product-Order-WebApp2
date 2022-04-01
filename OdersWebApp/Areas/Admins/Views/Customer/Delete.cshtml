@@ -1,0 +1,18 @@
+﻿@model OdersWebApp.Models.Customer
+@{ ViewBag.Title = $"Delete Customer";}
+
+
+
+<form asp-action="Delete" method="post">
+
+    <input type="hidden" asp-for="CustomerID" />
+    <p>
+        You are about to delete customer <b>@Model.CustomerFullName</b>. Do you wish to contiune?
+    </p>
+
+    <button type="submit" class="btn btn-danger">Yes</button>
+    <a asp-area="Admins" asp-action="Details" asp-controller="Customer"
+       asp-route-model="@ViewBag.Action" asp-route-val="@Model.Slug"
+       class="btn btn-dark">No</a>
+
+</form>

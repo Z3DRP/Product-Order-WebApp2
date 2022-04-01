@@ -1,0 +1,41 @@
+﻿@model IEnumerable<OdersWebApp.Models.Product>
+@{ ViewBag.Title = "Products";}
+
+<a asp-area="Admins" asp-action="Add" asp-controller="Product" class="ml-2">Add Product</a>
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Unit Price</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (OdersWebApp.Models.Product product in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-area="Admins" asp-action="Details" asp-controller="Product"
+                       asp-route-model="@ViewBag.Action" asp-route-val="@product.Slug">
+                        @product.Name
+                    </a>
+                </td>
+                <td>
+                    <a asp-area="Admins" asp-action="Details" asp-controller="Product"
+                       asp-route-model="@ViewBag.Action" asp-route-val="@product.Slug">
+                        @product.Description
+                    </a>
+                </td>
+                <td>@product.UnitPrice.ToString("C")</td>
+                <td>
+                    @product.Image
+                @*<a asp-action="ProductDetails" asp-controller="Admin"
+                       asp-route-action="ViewBag.Action" asp-route-type="ViewBag.Type" asp-route-val="@product.Slug">
+                        @product.Image
+                    </a>*@
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

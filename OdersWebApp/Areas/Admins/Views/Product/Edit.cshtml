@@ -1,0 +1,44 @@
+﻿@model OdersWebApp.Models.Product
+@{ ViewBag.Title = $"{ViewBag.Action} Product"; }
+
+<h2>@ViewBag.Action Product</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="ProductID" />
+
+    <div class="form-group">
+        <label asp-for="Name">Name:</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description:</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="UnitPrice">Unit Price:</label>
+        <input asp-for="UnitPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">Image:</label>
+        <!--
+        <input type="file" asp-for="Image" class="form-control" />
+        <input type="button" asp-action="" value="Upload" /> -->
+        <input asp-for="Image" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-dark">@ViewBag.Action</button>
+
+    @if (ViewBag.Action == "Edit")
+    {
+        <a asp-area="Admins" asp-action="Details" asp-controller="Product"
+           asp-route-model="@ViewBag.Action" asp-route-val="@Model.Slug"
+           class="btn btn-dark">Cancel</a>
+    }
+    else
+    {
+        <a asp-area="Admins" asp-action="Index" asp-controller="Home"
+           class="btn btn-dark">Cancel</a>
+    }
+</form>
