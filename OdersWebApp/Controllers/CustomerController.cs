@@ -1,0 +1,16 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace OdersWebApp.Controllers
+{
+    public class CustomerController : Controller
+    {
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+    }
+}
