@@ -14,20 +14,16 @@
                     <a class="nav-link text-dark" asp-area="Admins" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="Admins" asp-controller="Product" asp-action="Add"
-                       asp-route-model="" asp-route-val="">Add Products</a>
+                    <a class="nav-link text-dark" asp-area="Admins" asp-controller="Order" asp-action="Add"
+                       asp-route-model="Customer" asp-route-val="">Add Orders</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="Admins" asp-controller="Product" asp-action="Edit"
-                       asp-route-model="" asp-route-id="">Edit Products</a>
+                    <a class="nav-link text-dark" asp-area="Admins" asp-controller="Order" asp-action="DisplayAll"
+                       asp-route-model="Order" asp-route-id="">Edit Orders</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="Admins" asp-controller="Product" asp-action="DisplayAll"
-                       asp-route-model="" asp-route-id="">Show Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="Admins" asp-controller="Product" asp-action="Delete"
-                       asp-route-model="" asp-route-id="">Delete Products</a>
+                    <a class="nav-link text-dark" asp-area="Admins" asp-controller="Order" asp-action="DisplayAll"
+                       asp-route-model="Order" asp-route-id="">Show Orders</a>
                 </li>
             </ul>
         </div>

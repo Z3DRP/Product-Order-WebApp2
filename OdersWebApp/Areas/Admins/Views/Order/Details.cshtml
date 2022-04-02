@@ -38,12 +38,12 @@
     </li>
     <li class="list-group-item">
         <a asp-area="Admins" asp-action="Edit" asp-controller="Order"
-           asp-route-model="@ViewBag.Action" asp-route-val="@Model.Slug">
+           asp-route-id="@Model.OrderID">
             class="btn btn-dark">Edit
         </a>
 
         <a asp-area="Admins" asp-action="Delete" asp-cpontroller="Order"
-           asp-route-model="@ViewBag.Action" asp-routeval="@Model.Slug"
+           asp-route-id="@Model.OrderID"
             class="btn btn-dark">Delete
         </a>
 

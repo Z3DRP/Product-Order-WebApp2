@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<OdersWebApp.Models.Customer>
 @{ ViewBag.Title = "Customers";}
 
-<a asp-action="AddCustomer" asp-controller="Contact" class="ml-2">Add Customer</a>
-<table class="table mt-2">
+<a asp-area="Admins" asp-action="Add" asp-controller="Customer" class="ml-2">Add Customer</a>
+<table class="table mt-2 table-striped table-dark">
     <thead>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Phone Number</th>
             <th>Email Address</th>
             <th>Street</th>
@@ -21,18 +20,22 @@
             <tr>
                 <td>
                     <a aso-area="Admins" asp-action="Details" asp-controller="Customer"
-                       asp-route-model="@ViewBag.Action" asp-route-val="@customer.Slug">
-                        @customer.FirstName
+                       asp-route-id="@customer.CustomerID" id="grnTxt">
+                        @customer.CustomerFullName
                     </a>
                 </td>
                 <td>
                     <a asp-area="Admins" asp-action="Details" asp-controller="Customer"
-                       asp-route-model="@ViewBag.Action" asp-route-val="@customer.Slug">
-                        @customer.LastName
+                       asp-route-id="@customer.CustomerID" id="grnTxt">
+                        @customer.PhoneNumber
                     </a>
                 </td>
-                <td>@customer.PhoneNumber</td>
-                <td>@customer.EmailAddress</td>
+                <td>
+                    <a asp-area="Admins" asp-action="Details" asp-controller="Customer"
+                       asp-route-id="@customer.CustomerID" id="grnTxt">
+                        @customer.EmailAddress
+                    </a>
+                </td>
                 <td>@customer.Street</td>
                 <td>@customer.City</td>
                 <td>@customer.State</td>

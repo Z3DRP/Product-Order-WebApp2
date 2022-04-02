@@ -2,7 +2,7 @@
 @{ ViewBag.Title = "Orders";}
 
 <a asp-area="Admins" asp-action="Add" asp-controller="Order" class="ml-2">Add Order</a>
-<table class="table mt-2">
+<table class="table mt-2 table-striped table-dark">
     <thead>
         <tr>
             <th>Customer Name</th>
@@ -17,15 +17,15 @@
         {
             <tr>
                 <td>
-                    <a asp-area="Admins" asp-action="Details" asp-controller="Order"
-                       asp-route-model="@ViewBag.Action" asp-route-val="@order.Slug">
+                    <a asp-area="Admins" asp-action="Details" asp-controller="Customer"
+                       asp-route-id="@order.CustomerID" id="grnTxt">
                         @*@order.Customer.FirstName  @order.Customer.LastName*@
                         @order.Customer.CustomerFullName
                     </a>
                 </td>
                 <td>
                     <a asp-area="Admins" asp-action="Details" asp-controller="Order"
-                       asp-route-model="@ViewBag.Action" asp-route-val="@order.Slug">
+                       asp-route-id="@order.OrderID" id="grnTxt">
                         @order.OrderID
                     </a>
                 </td>
@@ -34,8 +34,8 @@
                     @*@order.Product.OrderBy(p => p.Name)*@
                     @foreach (OdersWebApp.Models.OrderedProduct op in order.Product)
                     {
-                        <a asp-area="Admin" asp-action="Details" asp-controller="Order"
-                           asp-route-model="@ViewBag.Action" asp-route-val="@order.ProductID">
+                        <a asp-area="Admin" asp-action="Details" asp-controller="Product"
+                           asp-route-id="@op.ProductID" id="grnTxt">
                             @op.Name
                         </a>
                     }
