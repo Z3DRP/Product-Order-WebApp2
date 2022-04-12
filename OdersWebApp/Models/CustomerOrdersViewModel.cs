@@ -7,5 +7,8 @@ namespace OdersWebApp.Models
 {
     public class CustomerOrdersViewModel
     {
+        public string CustomerName { get; set; }
+        public List<int> OrderIds { get; set; }
+
     }
 }

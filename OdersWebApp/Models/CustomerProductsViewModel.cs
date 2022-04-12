@@ -7,5 +7,8 @@ namespace OdersWebApp.Models
 {
     public class CustomerProductsViewModel
     {
+        public string CustomerName { get; set; }
+        public List<Product> CustomerProducts { get; set; }
+
     }
 }
