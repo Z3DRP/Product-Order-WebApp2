@@ -37,5 +37,17 @@ namespace OdersWebApp.Controllers
         {
             return View();
         }
+        public IActionResult QuickView()
+        {
+            // Change to usee session data to get the selected products
+
+            // init a list of product views
+            List<ProductViewModel> pView = new List<ProductViewModel>();
+            // get the items from DB
+            var products = context.Products.OrderBy(p => p.Name);
+            // assign items to productView
+            
+            return View(products);
+        }
     }
 }

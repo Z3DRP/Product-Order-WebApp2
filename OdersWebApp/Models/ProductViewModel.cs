@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OdersWebApp.Models
 {
-    public class ProductsViewModel
+    public class ProductViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

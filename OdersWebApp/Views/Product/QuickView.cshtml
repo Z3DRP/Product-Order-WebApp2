@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ProductViewModel>
+@{ ViewData["Title"] = "View Products";}
+
+<div class="container">
+    <div class="carousel" data-ride="carousel" data-interval="2000">
+        <div class="carousel-inner">
+            @foreach( ProductViewModel p in Model )
+            {
+                <div class="carousel-item @(p == Model.First() ? "active" : "")">
+                    <img class="d-block w-100" src="~/images/@p.Image" alt="Picture of @p.Name"/>
+                    <div class="carousel-caption d-none d-md-block">@p.Name</div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
