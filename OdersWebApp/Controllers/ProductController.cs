@@ -43,11 +43,20 @@ namespace OdersWebApp.Controllers
 
             // init a list of product views
             List<ProductViewModel> pView = new List<ProductViewModel>();
+            
             // get the items from DB
             var products = context.Products.OrderBy(p => p.Name);
             // assign items to productView
-            
-            return View(products);
+            foreach(Product p in products)
+            {
+                ProductViewModel prod = new ProductViewModel();
+                prod.Name = p.Name;
+                prod.Description = p.Description;
+                prod.UnitPrice = p.UnitPrice;
+                prod.Image = p.Image;
+                pView.Add(prod);
+            }
+            return View(pView);
         }
     }
 }
