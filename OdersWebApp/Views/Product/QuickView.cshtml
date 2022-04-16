@@ -1,17 +1,31 @@
 ﻿@model IEnumerable<ProductViewModel>
 @{ ViewData["Title"] = "View Products";}
-
-<div class="container">
-    <div class="carousel" data-ride="carousel" data-interval="1000">
-        <div class="carousel-inner">
-            @foreach( ProductViewModel p in Model )
-            {
-                <div class="carousel-item @(p == Model.First() ? "active" : "")">
-                    <img class="d-block w-100" src="~/images/@p.Image" alt="Picture of @p.Name"/>
-                    <div class="carousel-caption d-none d-md-block">@p.Name</div>
-                </div>
-            }
+<div>
+    <h2>@ViewData["Header"]</h2>
+</div>
+<div class="top-content">
+    <div class="container d-flex justify-content-center">
+        <div id="productCarousel" class="carousel" data-ride="carousel" @*data-interval="500"*@>
+            <div class="carousel-inner">
+                @foreach (ProductViewModel p in Model)
+                {
+                    <div class="carousel-item @(p == Model.First() ? "active" : "")">
+                        <img class="d-block w-40" src="~/images/@p.Image" alt="Picture of @p.Name" />
+                        <div class="carousel-caption d-none d-md-block">@p.Name</div>
+                    </div>
+                }
+            </div>
+            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                <!--Change to fontawesome arrows so they can be darkened-->
+                @*<span class="carousel-control-prev-icon" aria-hidden="true"></span>*@
+                <i class="fa-solid fa-arrow-left-long" aria-hidden="true" style="color:slateblue"></i>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#productCarousel" role="spinbutton" data-slide="next">
+                @*<span class="carousel-control-next-icon" aria-hidden="true"></span>*@
+                <i class="fa-solid fa-arrow-right-long" aria-hidden="true" style="color:slateblue"></i>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-
     </div>
 </div>

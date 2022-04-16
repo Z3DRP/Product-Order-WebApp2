@@ -16,6 +16,9 @@ namespace OdersWebApp.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Profiles> Profiles { get; set; }
+        public DbSet<OrderedProduct> OrderedProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuild)
         {
