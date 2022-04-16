@@ -12,5 +12,8 @@ namespace OdersWebApp.Models
         public string Description { get; set; }
         public double UnitPrice { get; set; }
         public string Image { get; set; }
+
+        public OrderedProduct OrderedProduct { get; set; }
+        public Product Product { get; set; }
     }
 }

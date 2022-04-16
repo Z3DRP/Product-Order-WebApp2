@@ -8,7 +8,7 @@ namespace OdersWebApp.Models
 {
     public class TempUser
     {
-        public int UID { get; set; }
+        public int ID { get; set; }
         [Required]
         [MaxLength(25, ErrorMessage = "Username must be 25 characters or less")]
         public string Username { get; set; }
