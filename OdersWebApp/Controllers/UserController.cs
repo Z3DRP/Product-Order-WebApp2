@@ -17,7 +17,7 @@ namespace OdersWebApp.Controllers
             context = ctx;
         }
 
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
         }

@@ -1,1 +1,28 @@
-﻿<h2>Will be add to cart page</h2>
+﻿@model OrderedProduct
+@{ ViewBag.Title = "Add Item";} 
+
+<div class="container-fluid">
+    <div class="card mx-auto col-md-3 col-10 mt-5">
+        <img class="mx-auto img-thumbnail" src="~/images/@Model.Image" alt="Image of @Model.Name" />
+        <div class="card-body text-center mx-auto">
+            <div class="cvp">
+                <h5 class="card-title font-weight-bold">@Model.Name</h5>
+                <p class="card-text">@Model.UnitPrice</p><br />
+                <select asp-for="@Model.Quantity"class="form-select" aria-label="Select Product Quantity">
+                    <option selected>Quantity</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                    <option value="5">Five</option>
+                </select>
+                <a asp-area="" asp-action="Details" asp-controller="Product" asp-route-id="@Model.ProductID"
+                   class="btn px-auto">View Details</a><br />
+                <a asp-area="" asp-action="Add" asp-controller="Cart" asp-route-id="@Model.ProductID"
+                   class="btn px-auto">View Details</a><br />
+                <a asp-area="" asp-action="CardList" asp-controller="Product" asp-route-id="@Model.ProductID"
+                   class="btn px-auto">View Details</a>
+            </div>
+        </div>
+    </div>
+</div>

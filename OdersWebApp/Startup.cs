@@ -62,11 +62,15 @@ namespace OdersWebApp
                     areaName: "Admins",
                     pattern: "Admins/{controller=Home}/{action=Index}/manage/{model?}/{id?}");
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "default3",
+                    pattern: "{controller=Home}/{action=Index}/cart/{id?}/{slug?}/{qty?}");
                 endpoints.MapControllerRoute(
                     name: "default2",
                     pattern: "{controller=Home}/{action=Index}/product/{id?}/{slug?}");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                
             });
         }
     }
