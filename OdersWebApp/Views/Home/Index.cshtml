@@ -14,29 +14,25 @@
                         <div class="mb-md-5 mt-md-4 pb-5">
 
                             <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                            <p class="text-white-50 mb-5">Enter Your Username</p>
 
-                            <div class="form-outline form-white mb-4">
-                                <input asp-for="Username" class="form-control form-control-lg" />
-                                <label asp-for="Username" class="form-label">Username</label>
-                            </div>
+                            <form asp-action="Login" method="post">
+                                <div class="form-outline form-white mb-4">
+                                    <input asp-for="Username" class="form-control form-control-lg" />
+                                    <label asp-for="Username" class="form-label">Username</label>
+                                </div>
 
-                            <!--Do not need right now-->
-                            @*<div class="form-outline form-white mb-4">
+                                <!--Do not need right now-->
+                                @*<div class="form-outline form-white mb-4">
                                 <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                                <label class="form-label" for="typePasswordX">Password</label>
-                            </div>
-                            <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>*@
+                                 <label class="form-label" for="typePasswordX">Password</label>
+                                </div>
+                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>*@
 
-                            <button asp-area="" asp-action="Login" asp-controller="User"
-                                    class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-
-                            <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-                            </div>
-
+                                @*<button asp-area="" asp-action="Login" asp-controller="User"
+                                        class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>*@
+                                <a asp-action="Login" asp-controller="User" asp-route-id=""
+                                   class="btn btn-outline-light btn-lg-px-5" type="submit">Login</a>
+                            </form>
                         </div>
 
                         <div>

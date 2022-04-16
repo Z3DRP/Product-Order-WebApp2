@@ -24,6 +24,8 @@ namespace OdersWebApp.Models
 
             if (Quantity.HasValue && UnitPrice > 0)
                 price = Quantity.Value * UnitPrice;
+            else
+                price = UnitPrice;
 
             return price;
         }

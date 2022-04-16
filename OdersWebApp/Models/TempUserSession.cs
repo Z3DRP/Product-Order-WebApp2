@@ -8,7 +8,7 @@ namespace OdersWebApp.Models
         private const string ProductKey = "myProducts";
         private const string CountKey = "productCount";
         private const string NameKey = "usrname";
-
+        private const string TotalKey = "tKey";
         private ISession session { get; set; }
         public TempUserSession(ISession sesh)
         {
@@ -18,6 +18,7 @@ namespace OdersWebApp.Models
         {
             session.SetObject(ProductKey, products);
             session.SetInt32(CountKey, products.Count);
+            SetMyTotal();
         }
         public List<OrderedProduct> GetMyProducts() =>
             // if ProductKey for list not found is session gets empty list
@@ -28,6 +29,15 @@ namespace OdersWebApp.Models
             session.SetString(NameKey, usrName);
         }
         public void GetUsrName() => session.GetString(NameKey);
+        public void SetMyTotal()
+        {
+            double total;
+            OrderProductListViewModel myProducts = new OrderProductListViewModel();
+            myProducts.Products = GetMyProducts();
+            total = myProducts.GetOrderTotal();
+            session.SetObject(TotalKey, total);
+        }
+        public string GetMyTotal() => session.GetString(TotalKey);
         public void RemoveMyProducts()
         {
             session.Remove(ProductKey);

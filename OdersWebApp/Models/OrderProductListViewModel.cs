@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OdersWebApp.Models
 {
-    public class OrderProductListViewModel
+    public class OrderProductListViewModel : OrderProductViewModel
     {
         public Customer Customer { get; set; }
         public List<OrderedProduct> Products { get; set; }

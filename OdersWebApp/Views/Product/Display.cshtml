@@ -33,6 +33,12 @@
                         <img src="~/images/@product.Image" alt="Image of a product" />
                     </a>
                 </td>
+                <td>
+                    <a asp-area="" asp-action="AddToCart" asp-controller="Product"
+                       asp-route-id="@product.ProductID">
+                        <i class="fa-shopping-cart"></i> 
+                    </a>
+                </td>
             </tr>
         }
     </tbody>

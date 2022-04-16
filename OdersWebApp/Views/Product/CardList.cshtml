@@ -19,7 +19,10 @@
                                         <p class="card-text">@p.UnitPrice</p>
                                         <a asp-area="" asp-action="Details" asp-controller="Product" asp-route-id="@p.Id"
                                            class="btn px-auto">View Details</a><br />
-                                        <a asp-area="" asp-action="AddToCart" asp-controller="Product" asp-route-id="@p.Id" 
+                                        <!--Adds one item to the prouct list-->
+                                        <a asp-area="" asp-action="QuickAdd" asp-controller="Product" asp-route-id="@p.Id"
+                                           class="btn px-auto">Quick Add</a>
+                                        <a asp-area="" asp-action="AddToCart" asp-controller="Product" asp-route-id="@p.Id"
                                            class="btn px-auto">Add to Cart</a>
                                     </div>
                                 </div>

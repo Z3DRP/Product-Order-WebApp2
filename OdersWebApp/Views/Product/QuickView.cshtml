@@ -10,8 +10,12 @@
                 @foreach (ProductViewModel p in Model)
                 {
                     <div class="carousel-item @(p == Model.First() ? "active" : "")">
-                        <img class="d-block w-40" src="~/images/@p.Image" alt="Picture of @p.Name" />
-                        <div class="carousel-caption d-none d-md-block">@p.Name</div>
+                        <a asp-area="" asp-action="Add" asp-controller="Product" asp-route-id="@p.Id">
+                            <img class="d-block w-40" src="~/images/@p.Image" alt="Picture of @p.Name" />
+                        </a>
+                        <a asp-area="" asp-action="Add" asp-controller="Product" asp-route-id="@p.Id">
+                            <div class="carousel-caption d-none d-md-block">@p.Name</div>
+                        </a>
                     </div>
                 }
             </div>
