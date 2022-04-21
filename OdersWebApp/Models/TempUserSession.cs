@@ -28,7 +28,7 @@ namespace OdersWebApp.Models
         {
             session.SetString(NameKey, usrName);
         }
-        public void GetUsrName() => session.GetString(NameKey);
+        public string GetUsrName() => session.GetString(NameKey);
         public void SetMyTotal()
         {
             double total;

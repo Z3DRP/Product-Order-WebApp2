@@ -1,9 +1,14 @@
-﻿<div class="container-fluid justify-content-center">
+﻿@model TempUser
+@{ 
+    var session = new TempUserSession(Context.Session);
+}
+
+<div class="container-fluid justify-content-center">
     <div class="card" style="width:auto">
         <img class="card-img-top p-1" src="/Images/apex2.jpg" alt="Apex Logo" />
         <br />
         <div class="card-body">
-            <h4 class="card-title p-1">Welcome to the Apex Solutions</h4>
+            <h4 class="card-title p-1">Welcome Back @(session.GetUsrName() == null ? "" : session.GetUsrName()) </h4>
             <p class="card-text">
                 Order one of our many products to make you more productive.
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt<br />
