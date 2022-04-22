@@ -23,11 +23,10 @@ namespace OdersWebApp.Models
         public List<OrderedProduct> GetMyProducts() =>
             // if ProductKey for list not found is session gets empty list
             session.GetObject<List<OrderedProduct>>(ProductKey) ?? new List<OrderedProduct>();
-        public int? GetMyProductCount() => session.GetInt32(CountKey);
-        public void SetUserName(string usrName = "Not Assigned")
-        {
-            session.SetString(NameKey, usrName);
-        }
+        public int? GetMyProductCount() => 
+            session.GetInt32(CountKey);
+        public void SetUserName(string usrName)
+            => session.SetString(NameKey, usrName);
         public string GetUsrName() => session.GetString(NameKey);
         public void SetMyTotal()
         {
@@ -37,7 +36,8 @@ namespace OdersWebApp.Models
             total = myProducts.GetOrderTotal();
             session.SetObject(TotalKey, total);
         }
-        public string GetMyTotal() => session.GetString(TotalKey);
+        public string GetMyTotal() => 
+            session.GetString(TotalKey);
         public void RemoveMyProducts()
         {
             session.Remove(ProductKey);

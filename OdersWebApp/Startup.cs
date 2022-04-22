@@ -70,6 +70,9 @@ namespace OdersWebApp
                     name: "default2",
                     pattern: "{controller=Home}/{action=Index}/product/{id?}/{slug?}");
                 endpoints.MapControllerRoute(
+                    name: "loginDefault",
+                    pattern: "{controller=Home}/{action=Index}login/{username?}/{id?}");
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 

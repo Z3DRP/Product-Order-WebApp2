@@ -15,7 +15,7 @@
 
                             <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
 
-                            <form asp-action="Login" method="post">
+                            <form asp-action="Login"  method="post">
                                 <div class="form-outline form-white mb-4">
                                     <input asp-for="Username" class="form-control form-control-lg" />
                                     <label asp-for="Username" class="form-label">Username</label>
@@ -30,8 +30,16 @@
 
                                 @*<button asp-area="" asp-action="Login" asp-controller="User"
                                         class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>*@
-                                <a asp-action="Login" asp-controller="User" asp-route-id=""
-                                   class="btn btn-outline-light btn-lg-px-5" type="submit">Login</a>
+
+                                @*<a asp-action="Login" asp-controller="User" class="btn btn-outline-light btn-lg-px-5" >Login</a>*@
+
+                                @*<a asp-action="Login" asp-controller="User" asp-route-username="Username" asp-route-id=""
+                                   class="btn btn-outline-light btn-lg-px-5" type="submit">Login</a>*@
+
+                                <button asp-action="Login" asp-controller="User" 
+                                        type="submit" class="btn btn-outline-light btn-lg-px-5">Login</button>
+
+
                             </form>
                         </div>
 

@@ -68,7 +68,7 @@ namespace OdersWebApp.Controllers
         public IActionResult QuickView()
         {
             // Change to usee session data to get the selected products
-            ViewData["PageHeader"] = "Shop Our Products";
+            TempData["Action"] = "Browse Our Products";
             // init a list of product views
             List<ProductViewModel> pView = new List<ProductViewModel>();
             
