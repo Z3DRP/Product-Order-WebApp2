@@ -10,11 +10,12 @@ namespace OdersWebApp.Models
         private const string CountKey = "mycount";
         private OrderContext context { get; set; }
 
-        private List<OrderedProduct> items { get; set; }
-        private List<ProductDTO> storedProducts { get; set; }
+        private List<CartProduct> products { get; set; }
+        private List<CartProductDTO> storedProducts { get; set; }
         private ISession session { get; set; }
         private IRequestCookieCollection requestCookies { get; set; }
         private IResponseCookies responseCookies { get; set; }
+
         public Cart(HttpContext ctx, OrderContext pctx)
         {
             session = ctx.Session;
@@ -22,37 +23,91 @@ namespace OdersWebApp.Models
             responseCookies = ctx.Response.Cookies;
             context = pctx;
         }
-        public OrderedProduct GetById(int id) =>
-            items.FirstOrDefault(p => p.ProductID == id);
-        public void Add(OrderedProduct product)
+        public double Subtotal => products.Sum(p => p.Subtotal);
+
+        public int? Count => session.GetInt32(CountKey) ?? requestCookies.GetInt32(CountKey);
+
+        public IEnumerable<CartProduct> List => products;
+
+        public CartProduct GetById(int id) =>
+            products.FirstOrDefault(p => p.Product.ProductID == id);
+       
+        public void Add(CartProduct product)
         {
-            var productInCart = GetById(product.ProductID);
+            var productInCart = GetById(product.Product.ProductID);
             // add if new
             if (productInCart == null)
             {
-                items.Add(product);
+                products.Add(product);
             }
             else // if not new increase quantity by 1
             {
                 productInCart.Quantity += 1;
             }
         }
-        public void Fill(ProductDTO products)
+        public void Edit(CartProduct product)
         {
-            items = session.GetObject<List<OrderedProduct>>(CartKey);
-            if(items == null)
+            var productInCart = GetById(product.Product.ProductID);
+            if (productInCart != null)
             {
-                items = new List<OrderedProduct>();
-                storedProducts = requestCookies.GetObject<List<ProductDTO>>(CartKey);
+                productInCart.Quantity = product.Quantity;
             }
-            if (storedProducts?.Count > items?.Count)
-            {
-                foreach(ProductDTO storedProduct in storedProducts)
-                {
-                    var product = context.Products.
-                        FirstOrDefault(p => p.ProductID == storedProduct.ProductID);
+        }
+        public void Remove(CartProduct product) => products.Remove(product);
 
+        public void Clear() => products.Clear();
+
+        public void Save()
+        {
+            if (products.Count == 0)
+            {
+                session.Remove(CartKey);
+                session.Remove(CountKey);
+                responseCookies.Delete(CartKey);
+                responseCookies.Delete(CountKey);
+            }
+            else
+            {
+                session.SetObject<List<CartProduct>>(CartKey, products);
+                session.SetInt32(CountKey, products.Count);
+                responseCookies.SetObject<List<CartProductDTO>>(CartKey, products.ToDTO());
+                responseCookies.SetInt32(CountKey, products.Count);
+            }
+        }
+        // might have to make the argument a id from a product
+        public void Fill(Repo<Product> pData)
+        {
+            products = session.GetObject<List<CartProduct>>(CartKey);
+
+            if (products == null)
+            {
+                products = new List<CartProduct>();
+                storedProducts = requestCookies.GetObject<List<CartProductDTO>>(CartKey);
+            }
+
+            if (storedProducts?.Count > products?.Count)
+            {
+                foreach (CartProductDTO storedProduct in storedProducts)
+                {
+                    var product = pData.Get(new QueryOptions<Product>
+                    {
+                        Where = p => p.ProductID == storedProduct.ProductID
+                    });
+
+                    if (product != null)
+                    {
+                        var pdto = new ProductDTO();
+                        pdto.Load(product);
+
+                        CartProduct cProduct = new CartProduct
+                        {
+                            Product = pdto,
+                            Quantity = storedProduct.Quantity
+                        };
+                        products.Add(cProduct);
+                    }
                 }
+                Save();
             }
         }
     }
