@@ -16,12 +16,11 @@ namespace OdersWebApp.Models
         private IRequestCookieCollection requestCookies { get; set; }
         private IResponseCookies responseCookies { get; set; }
 
-        public Cart(HttpContext ctx, OrderContext pctx)
+        public Cart(HttpContext ctx)
         {
             session = ctx.Session;
             requestCookies = ctx.Request.Cookies;
             responseCookies = ctx.Response.Cookies;
-            context = pctx;
         }
         public double Subtotal => products.Sum(p => p.Subtotal);
 

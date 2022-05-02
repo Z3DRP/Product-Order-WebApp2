@@ -10,26 +10,42 @@ namespace OdersWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private OrderContext context { get; set; }
-
-        public CartController(OrderContext ctx)
+        private Repo<Product> data { get; set; }
+        public CartController(OrderContext ctx) => data = new Repo<Product>(ctx);
+        private Cart GetCart()
         {
-            context = ctx;
+            var cart = new Cart(HttpContext);
+            cart.Fill(data);
+            return cart;
         }
-        public IActionResult Add(ProductViewModel model)
+        public IActionResult Add(int id)
         {
-            model.OrderedProduct = (OrderedProduct)context.Products
-                .Where(p => p.ProductID == model.OrderedProduct.ProductID)
-                .FirstOrDefault();
-            var sesh = new TempUserSession(HttpContext.Session);
-            var products = sesh.GetMyProducts();
-            products.Add((OrderedProduct)model.Product);
+            // get the selected product from the db
+            var product = data.Get(new QueryOptions<Product>
+            {
+                Where = p => p.ProductID == id
+            }); ; // if item was not found 
+            if (product == null)
+                TempData["message"] = "An error occured while adding item to cart";
+            else
+            {
+                // create product item with default quantity of 1
+                var pto = new ProductDTO();
+                pto.Load(product);
+                CartProduct item = new CartProduct
+                {
+                    Product = pto,
+                    Quantity = 1
+                };
+                // add item to cart and save session
+                Cart cart = GetCart();
+                cart.Add(item);
+                cart.Save();
 
-            var cookie = new TempUserCookies(HttpContext.Response.Cookies);
-            cookie.SetMyProductIds(products);
-            TempData["message"] = $"{model.Product.Name} has been added to your cart";
-
-            return RedirectToAction("QuickView", "Product");
+                TempData["message"] = $"{product.Name} added to cart";
+            }
+            // eventually add code to redirect to where user left off
+            return RedirectToAction("Display", "Product");
         }
     }
 }

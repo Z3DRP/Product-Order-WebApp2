@@ -1,45 +1,59 @@
 ﻿@model IEnumerable<Product>
 @{ ViewBag.Title = "Products";}
 
-<table class="table mt-2 table-dark">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Unit Price</th>
-            <th>Image</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Product product in Model)
-        {
+<form asp-action="Add" asp-controller="Cart" method="post">
+
+    <table class="table mt-2 table-warning table-striped">
+        <thead>
             <tr>
-                <td>
-                    <a asp-area="" asp-action="Details" asp-controller="Product"
-                       asp-route-id="@product.ProductID" asp-route-slug="@product.Slug" id="grnTxt">
-                        @product.Name
-                    </a>
-                </td>
-                <td>
-                    <a asp-area="" asp-action="Details" asp-controller="Product"
-                       asp-route-id="@product.ProductID" asp-route-slug="@product.Slug" id="grnTxt">
-                        @product.Description
-                    </a>
-                </td>
-                <td>@product.UnitPrice.ToString("C")</td>
-                <td>
-                    <a asp-area="" asp-action="Details" asp-controller="Product"
-                       asp-route-id="@product.ProductID" asp-route-slug="@product.Slug" id="grnTxt">
-                        <img src="~/images/@product.Image" alt="Image of a product" />
-                    </a>
-                </td>
-                <td>
-                    <a asp-area="" asp-action="AddToCart" asp-controller="Product"
-                       asp-route-id="@product.ProductID">
-                        <i class="fa-shopping-cart"></i> 
-                    </a>
-                </td>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Unit Price</th>
+                <th>Image</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (Product product in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-area="" asp-action="Details" asp-controller="Product"
+                           asp-route-id="@product.ProductID" asp-route-slug="@product.Slug" id="grnTxt">
+                            @product.Name
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-area="" asp-action="Details" asp-controller="Product"
+                           asp-route-id="@product.ProductID" asp-route-slug="@product.Slug" id="grnTxt">
+                            @product.Description
+                        </a>
+                    </td>
+                    <td>@product.UnitPrice.ToString("C")</td>
+                    <td>
+                        <a asp-area="" asp-action="Details" asp-controller="Product"
+                           asp-route-id="@product.ProductID" asp-route-slug="@product.Slug" id="grnTxt">
+                            <img src="~/images/@product.Image" alt="Image of a product" />
+                        </a>
+                    </td>
+                    <td>
+                        <Label>Quantity</Label>
+                        <select id="quantity" name="quantity" class="form-control">
+                            @for (int index = 0; index <= 20; index++)
+                            {
+                                <option value="index">@index</option>
+                            }
+                            
+                        </select>
+                        <!--Not sure if i need this below-->
+                        @*<p><input type="submit" value="submit" /></p>*@
+                    </td>
+                    <td>
+                        <button type="submit" value="@product.ProductID" class="btn btn-outline-success">
+                            Add to Cart
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
