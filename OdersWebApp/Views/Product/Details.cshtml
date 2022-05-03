@@ -1,7 +1,7 @@
 ﻿@model Product
 @{ ViewBag.Title = "Product Details";}
 
-<h2>Product Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <ul class="list-group">
     <li class="list-group-item">
@@ -24,9 +24,9 @@
     <li class="list-group-item">
         <a asp-area="" asp-action="AddToCart" asp-controller="Product"
            asp-route-id="@Model.ProductID" asp-route-slug="@Model.Slug"
-           class="btn btn-dark">Add to Cart</a>
+           class="btn btn-success">Add to Cart</a>
 
         <a asp-area="" asp-action="Display" asp-controller="Product"
-           class="btn btn-dark">Back</a>
+           class="btn btn-danger">Back</a>
     </li>
 </ul>

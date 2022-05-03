@@ -33,21 +33,7 @@ namespace OdersWebApp.Controllers
 
             return View(product);
         }
-        public IActionResult AddToCart(ProductViewModel model)
-        {
-            model.OrderedProduct = (OrderedProduct)context.Products
-                .Where(p => p.ProductID == model.OrderedProduct.ProductID)
-                .FirstOrDefault();
-            var sesh = new TempUserSession(HttpContext.Session);
-            var products = sesh.GetMyProducts();
-            products.Add((OrderedProduct)model.Product);
-
-            var cookie = new TempUserCookies(HttpContext.Response.Cookies);
-            cookie.SetMyProductIds(products);
-            TempData["message"] = $"{model.Product.Name} has been added to your cart";
-
-            return RedirectToAction("QuickView", "Product");
-        }
+        
         public IActionResult QuicAdd(ProductViewModel model, int qty)
         {
             // since it was a quick add only add one of that product type

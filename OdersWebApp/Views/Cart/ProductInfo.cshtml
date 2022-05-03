@@ -1,0 +1,22 @@
+﻿@model ProductDetailViewModel
+<h2>Product Details</h2>
+
+<div class="container-fluid justify-content-center">
+    <div class="card" style="width:auto">
+        <img class="card-img-top p-1" src="@Model.Image" alt="@Model.Name image" />
+        <br />
+        <div class="card-body bg-warning">
+            <h4 class="card-title p-1">@Model.Name</h4>
+            <p class="card-text">
+                @Model.Description<br />
+                @Model.Price.ToString("C")<br />
+                <lable>Quantity Selected:</lable>
+                <div class="float-right">@Model.Quantity</div>
+                </div>
+            </p>
+            <a asp-action="Edit" asp-controller="Cart" class="btn btn-success">Edit</a>
+            <a asp-action="Remove" asp-controller="Cart" class="btn btn-success">Remove</a>
+            <a asp-action="Review" asp-controller="Cart" class="btn btn-success">Ok</a>
+        </div>
+    </div>
+</div>

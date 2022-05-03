@@ -5,6 +5,10 @@
     {
       "library": "font-awesome@6.1.1",
       "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "sass.js@0.11.1",
+      "destination": "wwwroot/lib/sass.js/"
     }
   ]
 }

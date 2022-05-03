@@ -1,0 +1,14 @@
+﻿$lightB: #FFB226;
+$blue: #85BDE8;
+$borange: #F5C894;
+$lorange: #FFE2A0;
+$purpBlue: #3C4DA4;
+
+$theme-colors: 
+    ( 
+    "primary": $blue, 
+    "secondary": $lorange, 
+    "info": $borange, 
+    "light": $lightB, 
+    "dark": $purpBlue 
+);

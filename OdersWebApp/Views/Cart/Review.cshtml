@@ -1,0 +1,81 @@
+﻿@model CartViewModel
+@{
+    ViewData["Title"] = " | Cart";
+    var session = new TempUserSession(Context.Session);
+}
+
+@if (session.GetUsrName() != null)
+{
+    <h1>@session.GetUsrName()'s Cart</h1>
+}
+else
+{
+    <h1>Your Cart</h1>
+}
+@if (TempData["message"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert(@TempData["message"]);
+        }
+    </script>
+}
+<form asp-action="Clear" method="post">
+    <ul class="list-group mb-4">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col">
+                    Subtotal: @Model.Subtotal.ToString("c")
+                </div>
+                <div class="col">
+                    <div class="float-right">
+                        <a asp-action="Checkout" class="btn btn-success">Checkout</a>
+                        <button type="submit" class="btn btn-danger">Clear Cart</button>
+                        <a asp-action="Display" asp-controller="Product"
+                           class="btn btn-primary">
+                            Keep Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</form>
+<form asp-action="Remove" method="post">
+    <table class="table table-info table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (CartProduct item in Model.ProductList)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="ProductInfo" asp-controller="Cart"
+                           asp-route-id="@item.Product.ProductID">
+                            @item.Product.Name
+                        </a>
+                    </td>
+                    <td>@item.Product.Price.ToString("c")</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Subtotal.ToString("c")</td>
+                    <td>
+                        <div class="float-right">
+                            <a asp-action="Edit" asp-controller="Cart"
+                               asp-route-id="@item.Product.ProductID" asp-route-slug="@item.Product.Name.Slug()"
+                               class="btn btn-warning">Edit</a>
+                            <button type="submit" name="id" value="@item.Product.ProductID"
+                                    class="btn btn-success">Remove</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

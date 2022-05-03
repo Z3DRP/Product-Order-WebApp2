@@ -20,11 +20,8 @@ namespace OdersWebApp.Controllers
         }
         public IActionResult Add(int id)
         {
-            // get the selected product from the db
-            var product = data.Get(new QueryOptions<Product>
-            {
-                Where = p => p.ProductID == id
-            }); ; // if item was not found 
+            var product = data.Get(id);
+
             if (product == null)
                 TempData["message"] = "An error occured while adding item to cart";
             else
@@ -46,6 +43,86 @@ namespace OdersWebApp.Controllers
             }
             // eventually add code to redirect to where user left off
             return RedirectToAction("Display", "Product");
+        }
+        public ViewResult Review()
+        {
+            Cart cart = GetCart();
+            var cartModel = new CartViewModel
+            {
+                ProductList = cart.List,
+                Subtotal = cart.Subtotal
+            };
+
+            return View(cartModel);
+        }
+
+        public ViewResult Checkout() => View("CheckoutTemp");
+
+        [HttpPost]
+        public RedirectToActionResult Remove(int id)
+        {
+            Cart cart = GetCart();
+            CartProduct product = cart.GetById(id);
+            cart.Remove(product);
+            cart.Save();
+
+            TempData["message"] = $"{product.Product.Name} removed from cart";
+            return RedirectToAction("Review");
+        }
+        [HttpPost]
+        public RedirectToActionResult Clear()
+        {
+            Cart cart = GetCart();
+            cart.Clear();
+            cart.Save();
+
+            TempData["message"] = "Cart has been cleared";
+            return RedirectToAction("Review");
+        }
+        public IActionResult Edit(int id)
+        {
+            Cart cart = GetCart();
+            CartProduct product = cart.GetById(id);
+
+            if (product == null)
+            {
+                TempData["message"] = "Unable to find cart item";
+                return RedirectToAction("Display");
+            }
+            else
+                return View(product);
+        }
+        [HttpPost]
+        public RedirectToActionResult Edit(CartProduct item)
+        {
+            Cart cart = GetCart();
+            cart.Edit(item);
+            cart.Save();
+
+            TempData["message"] = $"{item.Product.Name} has been updated";
+            return RedirectToAction("Review");
+        }
+        public IActionResult ProductInfo(int id)
+        {
+            // get cart item
+            Cart cart = GetCart();
+            CartProduct sessionProduct = cart.GetById(id);
+
+            // then create a  detail viewmodel for that product
+            var product = data.Get(id);
+
+            ProductDetailViewModel pview = new ProductDetailViewModel
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.UnitPrice,
+                Image = product.Image,
+                Quantity = sessionProduct.Quantity,
+                ID = product.ProductID
+            };
+            // return the view
+
+            return View(pview);
         }
     }
 }

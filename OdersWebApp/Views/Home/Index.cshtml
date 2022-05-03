@@ -13,7 +13,7 @@
 
                         <div class="mb-md-5 mt-md-4 pb-5">
 
-                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                            <h2 class="fw-bold mb-2 text-uppercase p-3">Login</h2>
 
                             <form asp-action="Login"  method="post">
                                 <div class="form-outline form-white mb-4">
@@ -21,31 +21,23 @@
                                     <label asp-for="Username" class="form-label">Username</label>
                                 </div>
 
-                                <!--Do not need right now-->
-                                @*<div class="form-outline form-white mb-4">
-                                <input type="password" id="typePasswordX" class="form-control form-control-lg" />
+                                <div class="form-outline form-white mb-4">
+                                <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Not Implmented Yet" />
                                  <label class="form-label" for="typePasswordX">Password</label>
                                 </div>
-                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>*@
-
-                                @*<button asp-area="" asp-action="Login" asp-controller="User"
-                                        class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>*@
-
-                                @*<a asp-action="Login" asp-controller="User" class="btn btn-outline-light btn-lg-px-5" >Login</a>*@
-
-                                @*<a asp-action="Login" asp-controller="User" asp-route-username="Username" asp-route-id=""
-                                   class="btn btn-outline-light btn-lg-px-5" type="submit">Login</a>*@
+                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
 
                                 <button asp-action="Login" asp-controller="User" 
-                                        type="submit" class="btn btn-outline-light btn-lg-px-5">Login</button>
-
+                                        type="submit" class="btn btn-success btn-lg-px-5">Login</button>
+                                <button asp-action="Skip" asp-controller="User"
+                                        class="btn btn-success btn-lg-px-5">Skip</button>
 
                             </form>
                         </div>
 
                         <div>
                             <p class="mb-0">
-                                Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
+                                Don't have an account? <a asp-action="Signup" asp-controller="User" class="text-white-50 fw-bold">Sign Up</a>
                             </p>
                         </div>
 

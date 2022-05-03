@@ -1,22 +1,31 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    var cart = new Cart(Context);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OdersWebApp</title>
-    <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/svg-with-js.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!--font awesome is not working for some reason-->
+    @*<link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/svg-with-js.min.css" />*@
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" />
-    <!--add font awesome-->
-
-
+    <link rel="stylesheet" href="~/css/StyleThemes.scss"/>
+    <link rel="stylesheet" href="~/lib/sass.js/sass.min.js"/>
+    
 </head>
-<body>
+<body class="bg-info">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OdersWebApp</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Apex Solutions</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,34 +33,39 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="SignUp">Sign Up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Display" asp-route-id="">
-                                Product View 1
+                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Home" asp-action="Index">
+                                <span class="fas fa-home"></span>&nbsp;Home
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="QuickView" asp-route-id="">
-                                Product View 2
+                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Customer" asp-action="SignUp">
+                                <span class="fas fa-edit"></span>&nbsp;Signup
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="CardList" asp-route-id="">
-                                Product View 3
+                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Product" asp-action="Display" asp-route-id="">
+                                <span class="fas fa-barcode"></span>&nbsp;Products
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Checkout" asp-route-id="">
-                                Shopping Cart
+                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Product" asp-action="QuickView" asp-route-id="">
+                                <span class="fas fa-barcode"></span>&nbsp;Products2
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admins" asp-controller="Home" asp-action="Index" asp-route-model="" asp-route-id="">
-                                Admin
+                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Cart" asp-action="Review" asp-route-id="">
+                                <span class="fas fa-shopping-cart"></span>&nbsp;Cart
+                                <span class="badge badge-light">@cart.Count</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Cart" asp-action="Checkout" asp-route-id="">
+                                <span class="fa fa-amazon-pay"></span>&nbsp;Checkout
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark btn-outline-success" asp-area="Admins" asp-controller="Home" asp-action="Index" asp-route-model="" asp-route-id="">
+                                <span class="fas fa-cog"></span>&nbsp;Admin
                             </a>
                         </li>
                     </ul>
@@ -65,9 +79,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-light">
         <div class="container">
-            &copy; 2022 - OdersWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - ApexSolutions - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

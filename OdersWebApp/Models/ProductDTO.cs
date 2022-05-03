@@ -10,12 +10,14 @@ namespace OdersWebApp.Models
         public int ProductID { get; set; }
         public string Name { get; set; }  
         public double Price { get; set; }
-        
+        public string Description { get; set; }
+
         public void Load(Product product)
         {
             ProductID = product.ProductID;
             Name = product.Name;
             Price = product.UnitPrice;
+            Description = product.Description;
         }
 
     }

@@ -1,6 +1,15 @@
 ﻿@model IEnumerable<Product>
 @{ ViewBag.Title = "Products";}
 
+
+@if (TempData["message"] != null)
+ {
+<script type="text/javascript">
+        window.onload = function () {
+            alert(@TempData["message"]);
+        }
+</script>
+ }
 <form asp-action="Add" asp-controller="Cart" method="post">
 
     <table class="table mt-2 table-warning table-striped">
@@ -18,37 +27,39 @@
                 <tr>
                     <td>
                         <a asp-area="" asp-action="Details" asp-controller="Product"
-                           asp-route-id="@product.ProductID" asp-route-slug="@product.Slug" id="grnTxt">
+                           asp-route-id="@product.ProductID" asp-route-slug="@product.Slug">
                             @product.Name
                         </a>
                     </td>
                     <td>
                         <a asp-area="" asp-action="Details" asp-controller="Product"
-                           asp-route-id="@product.ProductID" asp-route-slug="@product.Slug" id="grnTxt">
+                           asp-route-id="@product.ProductID" asp-route-slug="@product.Slug">
                             @product.Description
                         </a>
                     </td>
                     <td>@product.UnitPrice.ToString("C")</td>
                     <td>
                         <a asp-area="" asp-action="Details" asp-controller="Product"
-                           asp-route-id="@product.ProductID" asp-route-slug="@product.Slug" id="grnTxt">
+                           asp-route-id="@product.ProductID" asp-route-slug="@product.Slug">
                             <img src="~/images/@product.Image" alt="Image of a product" />
                         </a>
                     </td>
                     <td>
                         <Label>Quantity</Label>
                         <select id="quantity" name="quantity" class="form-control">
-                            @for (int index = 0; index <= 20; index++)
+                            @for (int index = 0; index <= 10; index++)
                             {
                                 <option value="index">@index</option>
                             }
                             
                         </select>
-                        <!--Not sure if i need this below-->
-                        @*<p><input type="submit" value="submit" /></p>*@
+
                     </td>
                     <td>
-                        <button type="submit" value="@product.ProductID" class="btn btn-outline-success">
+                        @*<button type="submit" value="@product.ProductID" class="btn btn-outline-success">
+                            Add to Cart
+                        </button>*@
+                        <button asp-area="" asp-action="Add" asp-controller="Cart" asp-route-id="@product.ProductID" class="btn btn-success">
                             Add to Cart
                         </button>
                     </td>
