@@ -18,8 +18,10 @@ namespace OdersWebApp.Controllers
             cart.Fill(data);
             return cart;
         }
-        public IActionResult Add(int id)
+        public IActionResult Add(int id, int quantity)
         {
+            
+
             var product = data.Get(id);
 
             if (product == null)
@@ -102,27 +104,33 @@ namespace OdersWebApp.Controllers
             TempData["message"] = $"{item.Product.Name} has been updated";
             return RedirectToAction("Review");
         }
+        
         public IActionResult ProductInfo(int id)
         {
-            // get cart item
-            Cart cart = GetCart();
-            CartProduct sessionProduct = cart.GetById(id);
-
-            // then create a  detail viewmodel for that product
-            var product = data.Get(id);
-
-            ProductDetailViewModel pview = new ProductDetailViewModel
+            if (id > 0)
             {
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.UnitPrice,
-                Image = product.Image,
-                Quantity = sessionProduct.Quantity,
-                ID = product.ProductID
-            };
-            // return the view
+                // get cart item
+                Cart cart = GetCart();
+                CartProduct sessionProduct = cart.GetById(id);
 
-            return View(pview);
+                // then create a  detail viewmodel for that product
+                var product = data.Get(id);
+
+                ProductDetailViewModel pview = new ProductDetailViewModel
+                {
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.UnitPrice,
+                    Image = product.Image,
+                    Quantity = sessionProduct.Quantity,
+                    ID = product.ProductID
+                };
+                // return the view
+
+                return View(pview);
+            }
+            else
+                return new EmptyResult();
         }
     }
 }

@@ -25,7 +25,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Apex Solutions</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Landing">Apex Solutions</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,13 +33,18 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Home" asp-action="Landing">
                                 <span class="fas fa-home"></span>&nbsp;Home
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Customer" asp-action="SignUp">
+                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Customer" asp-action="Add">
                                 <span class="fas fa-edit"></span>&nbsp;Signup
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="User" asp-action="Add">
+                                <span class="fas fa-user"></span>&nbsp;Create Username
                             </a>
                         </li>
                         <li class="nav-item">
@@ -47,11 +52,11 @@
                                 <span class="fas fa-barcode"></span>&nbsp;Products
                             </a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Product" asp-action="QuickView" asp-route-id="">
                                 <span class="fas fa-barcode"></span>&nbsp;Products2
                             </a>
-                        </li>
+                        </li>*@
                         <li class="nav-item">
                             <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Cart" asp-action="Review" asp-route-id="">
                                 <span class="fas fa-shopping-cart"></span>&nbsp;Cart
@@ -60,7 +65,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark btn-outline-success" asp-area="" asp-controller="Cart" asp-action="Checkout" asp-route-id="">
-                                <span class="fa fa-amazon-pay"></span>&nbsp;Checkout
+                                <span class="fa fa-dollar-sign"></span>&nbsp;Checkout
                             </a>
                         </li>
                         <li class="nav-item">

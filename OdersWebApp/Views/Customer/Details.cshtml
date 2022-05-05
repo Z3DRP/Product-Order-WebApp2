@@ -1,0 +1,51 @@
+﻿@model Customer
+@{ ViewBag.Title = "Customer Details";}
+
+<h2>Customer Details</h2>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <label>First Name:</label>
+        @Model.FirstName
+    </li>
+    <li class="list-group-item">
+        <label>Last Name:</label>
+        @Model.LastName
+    </li>
+    <li class="list-group-item">
+        <label>Phone Number:</label>
+        @Model.PhoneNumber
+    </li>
+    <li class="list-group-item">
+        <label>Email:</label>
+        @Model.EmailAddress
+    </li>
+    <li class="list-group-item">
+        <label>Street:</label>
+        @Model.Street
+    </li>
+    <li class="list-group-item">
+        <label>City:</label>
+        @Model.City
+    </li>
+    <li class="list-group-item">
+        <label>State:</label>
+        @Model.State
+    </li>
+    <li class="list-group-item">
+        <lable>Zipcode:</lable>
+        @Model.Zipcode
+    </li>
+    <li class="list-group-item">
+        <a asp-area="" asp-action="Edit" asp-controller="Customer"
+           asp-route-id="@Model.CustomerID"
+           class="btn btn-dark">Edit</a>
+
+        <a asp-area="" asp-action="Delete" asp-controller="Customer"
+           asp-route-id="@Model.CustomerID"
+           class="btn btn-dark">Delete</a>
+
+        <a asp-area="" asp-action="Landing" asp-controller="Home"
+           class="btn btn-primary">Home</a>
+    </li>
+</ul>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OdersWebApp.Models;
+using OdersWebApp.Encryption;
 
 namespace OdersWebApp.Controllers
 {
@@ -16,52 +17,6 @@ namespace OdersWebApp.Controllers
         {
             context = pctx;
         }
-        [HttpGet]
-        public IActionResult Register()
-        {
-            ViewBag.Action = "Add";
-            ViewBag.Type = "Customer";
-            return View("SignUp", new Customer());
-        }
-        [HttpGet]
-        public IActionResult SignUp(int id)
-        {
-            ViewBag.Action = "Edit";
-            ViewBag.Type = "Customer";
-            var customer = context.Customers
-                .FirstOrDefault(c => c.CustomerID == id);
-
-            return View(customer);
-        }
-        [HttpPost]
-        public IActionResult SignUp(Customer customer)
-        {
-            ViewBag.Action = "Edit";
-            ViewBag.Type = "Customer";
-            string action = (customer.CustomerID == 0) ? "Add" : "Edit";
-
-            if (ModelState.IsValid)
-            {
-                if (action == "Add")
-                    context.Customers.Add(customer);
-                else
-                    context.Customers.Update(customer);
-                context.SaveChanges();
-
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ViewBag.Action = action;
-                return View(customer);
-            }
-        }
-        //public IActionResult History(int id)
-        //{
-        //    List<CustomerViewModel> cViews = new List<CustomerViewModel>();
-        //    CustomerViewModel customer = new CustomerViewModel();
-        //    var c = context.Customers.FirstOrDefault(c => c.CustomerID == id);
-        //}
         [HttpGet]
         public IActionResult Add()
         {
@@ -94,7 +49,7 @@ namespace OdersWebApp.Controllers
                     context.Customers.Update(customer);
                 context.SaveChanges();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Landing", "Home");
             }
             else
             {
@@ -117,7 +72,7 @@ namespace OdersWebApp.Controllers
             ViewBag.Type = "Customer";
             context.Customers.Remove(customer);
             context.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Landing", "Home");
         }
         public IActionResult Details(int id)
         {

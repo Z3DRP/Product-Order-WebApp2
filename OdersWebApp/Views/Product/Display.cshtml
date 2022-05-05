@@ -1,15 +1,19 @@
 ﻿@model IEnumerable<Product>
-@{ ViewBag.Title = "Products";}
+@{ ViewBag.Title = "Products";
+    TempData["quantity"] = 0;
+    }
 
-
-@if (TempData["message"] != null)
- {
 <script type="text/javascript">
-        window.onload = function () {
-            alert(@TempData["message"]);
-        }
+
+    if ("@TempData["message"]" != "")
+    {
+        function my_code() {
+        alert("@TempData["message"]");
+    }
+    } // end if
+    window.onload = my_code();
 </script>
- }
+
 <form asp-action="Add" asp-controller="Cart" method="post">
 
     <table class="table mt-2 table-warning table-striped">
@@ -46,12 +50,11 @@
                     </td>
                     <td>
                         <Label>Quantity</Label>
-                        <select id="quantity" name="quantity" class="form-control">
+                        <select name="quantity" class="form-control">
                             @for (int index = 0; index <= 10; index++)
                             {
                                 <option value="index">@index</option>
                             }
-                            
                         </select>
 
                     </td>

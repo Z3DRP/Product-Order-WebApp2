@@ -2,7 +2,18 @@
 @{
     Layout = "_Login";
     ViewBag.Title = "Login Screen";
- }
+}
+@*Since full login is not implemented yet. This will hold the error message if they do not enter a username and click login*@
+<script type="text/javascript">
+
+    if ("@TempData["loginErrMsg"]" != "")
+    {
+        function my_code() {
+        alert("@TempData["loginErrMsg"]");
+    }
+    } // end if
+    window.onload = my_code();
+</script>
 
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
@@ -15,22 +26,26 @@
 
                             <h2 class="fw-bold mb-2 text-uppercase p-3">Login</h2>
 
-                            <form asp-action="Login"  method="post">
+                            <form asp-action="Login" method="post">
                                 <div class="form-outline form-white mb-4">
                                     <input asp-for="Username" class="form-control form-control-lg" />
                                     <label asp-for="Username" class="form-label">Username</label>
                                 </div>
 
                                 <div class="form-outline form-white mb-4">
-                                <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Not Implmented Yet" />
-                                 <label class="form-label" for="typePasswordX">Password</label>
+                                    <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Not Implmented Yet" />
+                                    <label class="form-label" for="typePasswordX">Password</label>
                                 </div>
                                 <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
 
-                                <button asp-action="Login" asp-controller="User" 
-                                        type="submit" class="btn btn-success btn-lg-px-5">Login</button>
+                                <button asp-action="Login" asp-controller="User"
+                                        type="submit" class="btn btn-success btn-lg-px-5">
+                                    Login
+                                </button>
                                 <button asp-action="Skip" asp-controller="User"
-                                        class="btn btn-success btn-lg-px-5">Skip</button>
+                                        class="btn btn-success btn-lg-px-5">
+                                    Skip
+                                </button>
 
                             </form>
                         </div>

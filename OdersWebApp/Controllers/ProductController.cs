@@ -22,7 +22,6 @@ namespace OdersWebApp.Controllers
             ViewBag.Action = "Display";
             ViewBag.Type = "Product";
             var products = context.Products.OrderBy(p => p.Name);
-
             return View(products);
         }
         public IActionResult Details(int id)
