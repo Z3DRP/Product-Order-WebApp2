@@ -1,27 +1,119 @@
 ﻿@model User
-@{ ViewBag.Title = $"{ViewBag.Action} User"; }
-
-<h2>@ViewBag.Action User</h2>
+@{
+    ViewBag.Title = $"{ViewBag.Action} User";
+    var session = new TempUserSession(Context.Session);
+}
 
 <div asp-validation-summary="All" class="text-danger"></div>
 
-<form asp-controlelr="Customer" asp-action="SignUp" method="post">
+<script type="text/javascript">
 
-    <input type="hidden" asp-for="UserID" />
+    let msg = "";
 
-    <div class="form-group">
-        <label asp-for="Username">Username:</label>
-        <input asp-for="Username" class="form-control" />
+    if ("@TempData["customerStatus"]" == "existing") {
+        msg = "You have a existing username.";
+        function my_code() {
+            alert(msg);
+        }
+        window.onload = my_code();
+
+    } // end if
+    else if ("@TempData["customerStatus"]" != "added") {
+        msg = "You must create sign up first to create a username.";
+        function my_code() {
+            alert(msg);
+        }
+        window.onload = my_code();
+    }
+    else if ("@TempData["customerStatus"]" == "added") {
+        msg = "This Feature is still under construction please come back later.";
+        function my_code() {
+            alert(msg);
+        }
+        window.onload = my_code();
+    }
+</script>
+
+@if (TempData["customerStatus"].ToString() == "added")
+{
+
+    <h2>This feature is under construction</h2>
+
+    <div class="container-fluid justify-content-center">
+        <div class="card" style="width:auto">
+            <img class="card-img-top p-1" src="/Images/construction.png" alt="Construction sign" />
+            <br />
+            <div class="card-body bg-warning">
+                <h4 class="card-title p-1">Account Creation</h4>
+                <p class="card-text">
+                    You must enter sign up before you can add a username into the system.
+                </p>
+                <a asp-area="" asp-action="Add" asp-controller="Customer" class="btn btn-success">Sign up</a>
+                <a asp-area="" asp-action="Landing" asp-controller="Home" class="btn btn-success">Back</a>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Password">Password:</label>
-        <input asp-for="Password" class="form-control" />
+
+
+    <!--Not being used right now, Use in future sprint...maybe-->
+
+    @*<form asp-controller="User" asp-action="Edit" method="post">
+
+        <input type="hidden" asp-for="UserID" />
+
+        <div class="form-group">
+            <label asp-for="Username">Username:</label>
+            <input asp-for="Username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Password:</label>
+            <input asp-for="Password" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-dark">Save</button>
+
+        <a asp-area="" asp-action="Landing" asp-controller="Home"
+           class="btn btn-dark">Cancel</a>
+
+    </form>*@
+
+}
+else if (TempData["customerStatus"].ToString() == "existing")
+{
+    <h2>You already have an account</h2>
+
+    <div class="container-fluid justify-content-center">
+        <div class="card" style="width:auto">
+            <img class="card-img-top p-1" src="/Images/userAdd.jpg" alt="Existing user icon" />
+            <br />
+            <div class="card-body bg-warning">
+                <h4 class="card-title p-1">@(session.GetUsrName() == null ? "" : session.GetUsrName()) you already have an account</h4>
+                <p class="card-text">
+                    Please check out products.
+                </p>
+                <a asp-area="" asp-action="Display" asp-controller="Product" class="btn btn-success">Products</a>
+                <a asp-area="" asp-action="Landing" asp-controller="Home" class="btn btn-success">Back</a>
+            </div>
+        </div>
     </div>
+}
+else
+{
+    <h2>Please sign up before trying to create a username</h2>
 
-    <button type="submit" class="btn btn-dark">Save</button>
+    <div class="container-fluid justify-content-center">
+        <div class="card" style="width:auto">
+            <img class="card-img-top p-1" src="/Images/userAdd.png" alt="Adding user icon" />
+            <br />
+            <div class="card-body bg-warning">
+                <h4 class="card-title p-1">Account Creation</h4>
+                <p class="card-text">
+                    You must enter sign up before you can add a username into the system.
+                </p>
+                <a asp-area="" asp-action="Add" asp-controller="Customer" class="btn btn-success">Sign up</a>
+                <a asp-area="" asp-action="Landing" asp-controller="Home" class="btn btn-success">Back</a>
+            </div>
+        </div>
+    </div>
+}
 
-    <a asp-area="" asp-action="Landing" asp-controller="Home"
-       class="btn btn-dark">Cancel</a>
-
-
-</form>

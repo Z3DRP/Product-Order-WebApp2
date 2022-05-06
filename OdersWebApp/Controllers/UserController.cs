@@ -17,12 +17,19 @@ namespace OdersWebApp.Controllers
         {
             context = ctx;
         }
-        public IActionResult Skip() => RedirectToAction("Landing", "Home");
-
+        public IActionResult Skip()
+        {
+            TempData["customerStatus"] = "";
+            return RedirectToAction("Landing", "Home");
+        }
         // for now make Login not have a Http request
         // last one used
         public IActionResult Login(string Username)
         {
+
+            // add the account creation flag
+            TempData["customerStatus"] = "existing";
+
             if (!string.IsNullOrEmpty(Username))
             {
                 TempData["Message"] = Username + " check out all of our products and don't forget to sign up once it is implemented";
@@ -121,12 +128,18 @@ namespace OdersWebApp.Controllers
         {
             ViewBag.Action = "Edit";
             ViewBag.Type = "User";
-            string action = (usr.UserID == 0) ? "Add" : "Edit";
+            string action = (usr.ID == 0) ? "Add" : "Edit";
 
             if (ModelState.IsValid)
             {
                 if (action == "Add")
                 {
+                    // set the user id stored in session state to userid for username created
+                    var sesh = new TempUserSession(HttpContext.Session);
+                    string uid = sesh.GetCid();
+                    Int32.TryParse(uid,out int id);
+                    usr.UserID = id;
+
                     // encrypt the entered pwd
                     string hashedPwd = Protector.Encryptor(usr.Password);
                     usr.Password = hashedPwd;
@@ -140,6 +153,7 @@ namespace OdersWebApp.Controllers
                     context.Users.Update(usr);
                 }
                 context.SaveChanges();
+                TempData["customerStatus"] = "existing";
 
                 return RedirectToAction("Landing", "Home");
             }

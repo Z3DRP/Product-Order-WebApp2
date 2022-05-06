@@ -27,7 +27,11 @@ namespace OdersWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMemoryCache();
-            services.AddSession();
+            services.AddSession(options =>
+                {
+                    options.IdleTimeout = TimeSpan.FromMinutes(10);
+                }
+            );
             services.AddControllersWithViews().AddNewtonsoftJson();
             services.AddDbContext<OrderContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OrderContext")));
         }

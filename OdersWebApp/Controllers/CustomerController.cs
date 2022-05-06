@@ -40,7 +40,8 @@ namespace OdersWebApp.Controllers
             ViewBag.Action = "Edit";
             ViewBag.Type = "Customer";
             string action = (customer.CustomerID == 0) ? "Add" : "Edit";
-
+            // get the first name and the last name so id can be found and saved to session to be used in username creation
+            
             if (ModelState.IsValid)
             {
                 if (action == "Add")
@@ -48,6 +49,21 @@ namespace OdersWebApp.Controllers
                 else
                     context.Customers.Update(customer);
                 context.SaveChanges();
+
+                // after customer added to db retieve the id
+                var cust = context.Customers.FirstOrDefault(c => c.FirstName == customer.FirstName && c.LastName == customer.LastName);
+                // add to tempdata
+                TempData["fname"] = customer.FirstName;
+                TempData["lname"] = customer.LastName;
+                TempData["cid"] = cust.CustomerID;
+                // then save id to session state
+                var sesh = new TempUserSession(HttpContext.Session);
+                sesh.SetFname(customer.FirstName);
+                sesh.SetLname(customer.LastName);
+                sesh.SetCid(cust.CustomerID.ToString());
+
+                // add a flag to test on username creation view
+                TempData["customerStatus"] = "added";
 
                 return RedirectToAction("Landing", "Home");
             }

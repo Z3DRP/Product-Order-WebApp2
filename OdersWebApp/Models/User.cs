@@ -10,7 +10,6 @@ namespace OdersWebApp.Models
     {
         public int ID { get; set; }
         [Required]
-        [MaxLength(70,ErrorMessage = "Name must be 70 characters or less")]
         public int UserID { get; set; }
         public Customer Customer { get; set; }
         [Required]

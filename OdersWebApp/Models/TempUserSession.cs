@@ -9,6 +9,10 @@ namespace OdersWebApp.Models
         private const string CountKey = "productCount";
         private const string NameKey = "usrname";
         private const string TotalKey = "tKey";
+        private const string FnameKey = "fName";
+        private const string LnameKey = "lname";
+        private const string CID = "Cid";
+
         private ISession session { get; set; }
         public TempUserSession(ISession sesh)
         {
@@ -28,6 +32,15 @@ namespace OdersWebApp.Models
         public void SetUserName(string usrName)
             => session.SetString(NameKey, usrName);
         public string GetUsrName() => session.GetString(NameKey);
+        public void SetFname(string fname)
+            => session.SetString(FnameKey, fname);
+        public string GetFname() => session.GetString(FnameKey);
+        public void SetLname(string lname)
+            => session.SetString(LnameKey, lname);
+        public string GetLname() => session.GetString(LnameKey);
+        public void SetCid(string cid)
+            => session.SetString(CID, cid);
+        public string GetCid() => session.GetString(CID);
         public void SetMyTotal()
         {
             double total;
@@ -43,5 +56,11 @@ namespace OdersWebApp.Models
             session.Remove(ProductKey);
             session.Remove(CountKey);
         }
+        public void RemoveCustomerID()
+            => session.Remove(CID);
+        public void RemoveFname()
+            => session.Remove(FnameKey);
+        public void RemoveLname()
+            => session.Remove(LnameKey);
     }
 }
